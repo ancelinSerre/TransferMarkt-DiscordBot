@@ -15,7 +15,7 @@ async def info(ctx, *args):
         player = PlayerScraper(player_name)
         market_value = player.market_value
         response_mkt_content = (
-            f">>> Voilà ce que j'ai trouvé    :arrow_down:"
+            f">>> Voilà ce que j'ai trouvé    :arrow_down:\n"
             + f"\n:white_small_square: **{player.data['player']}** a une valeur marchande de **{market_value}** 💶 selon TransferMarkt"
             + f"\n:white_small_square: Dernière mise à jour le **{player.last_update.strftime('%d/%m/%Y')}**"
             + "\n"
