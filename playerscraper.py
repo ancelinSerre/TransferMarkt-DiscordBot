@@ -33,7 +33,7 @@ class PlayerScraper():
         last_update = data[1]
         # Parse date
         if last_update is not None:
-            last_update = last_update.split(":")[-1][1:]
+            self.last_update = last_update.split(":")[-1][1:]
         # Parse currency
         if currency is not None:
             currency = " M€" if currency == "mio." else " K€"
