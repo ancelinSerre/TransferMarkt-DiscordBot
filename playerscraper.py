@@ -1,6 +1,3 @@
-import locale
-from datetime import datetime
-
 import requests
 from bs4 import BeautifulSoup
 
@@ -10,8 +7,6 @@ class PlayerScraper():
     headers = {"User-Agent":"Mozilla/5.0"}
 
     def __init__(self, player_name):
-        # Set locale to parse date
-        locale.setlocale(category=locale.LC_ALL, locale="French")
         self._data = {}
         self.player_page_url = ""
         self._set_player_page_url(player_name)
@@ -38,10 +33,7 @@ class PlayerScraper():
         last_update = data[1]
         # Parse date
         if last_update is not None:
-            try:
-                self.last_update = datetime.strptime(last_update.split(":")[-1][1:], "%d %B %Y").date()
-            except:
-                self.last_update = datetime.strptime(last_update.split(":")[-1][1:], "%d %b %Y").date()
+            last_update = last_update.split(":")[-1][1:]
         # Parse currency
         if currency is not None:
             currency = " M€" if currency == "mio." else " K€"
@@ -75,6 +67,6 @@ class PlayerScraper():
         return self._data["market_value"]
 
 if __name__ == "__main__":
-    ps = PlayerScraper("benzema")
+    ps = PlayerScraper("Kastriot Imeri")
     print(ps.data)
     print(ps.market_value)

@@ -17,7 +17,7 @@ async def info(ctx, *args):
         response_mkt_content = (
             f">>> Voilà ce que j'ai trouvé    :arrow_down:\n"
             + f"\n:white_small_square: **{player.data['player']}** a une valeur marchande de **{market_value}** 💶 selon TransferMarkt"
-            + f"\n:white_small_square: Dernière mise à jour le **{player.last_update.strftime('%d/%m/%Y')}**"
+            + f"\n:white_small_square: Dernière mise à jour le **{player.last_update}**"
             + "\n"
             + f"\n:globe_with_meridians:    **Nationalité** : {' - '.join(player.data.get('Nationalité', '-').split())}"
             + f"\n:date:    **Âge** : {player.data.get('Âge', '-')}, ({player.data.get('Date de naissance', '-')})"
