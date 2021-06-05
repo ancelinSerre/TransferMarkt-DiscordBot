@@ -14,7 +14,7 @@ async def info(ctx, *args):
         # Scrap data about the player
         player = PlayerScraper(player_name)
         market_value = player.market_value
-
+        joke = ""
         mkt_txt_content = ""
         if market_value == "-":
             mkt_txt_content = (
@@ -26,6 +26,19 @@ async def info(ctx, *args):
                 f"\n:white_small_square: **{player.data['player']}** a une valeur marchande de **{market_value}** 💶 selon TransferMarkt"
                 + f"\n:white_small_square: Dernière mise à jour le **{player.last_update}**"
             )
+            mvs = market_value.split(" ")
+            mv = float(mvs[0].replace(",", ".")) * (1000 if mvs[1] == "K€" else 1000000)
+            if mv > 1500000:
+                joke = "*Tu rêves ! Nous sommes les épiciers du foot, dois-je te le rappeler ?*"
+            elif mv >= 1000000:
+                joke = "*Hum... un peu juste, il va falloir en parler au Patron*"
+            elif mv >= 500000:
+                joke = "*Ok, avec un panier garni et un bon salaire ça peut peut-être passer...*"
+            elif mv >= 250000:
+                joke = "*C'est presque trop cher... t'es sûr de toi ?*"
+            else:
+                joke = "*Je sais pas pourquoi mais ça sent la pépite, tu le sens toi aussi ?*"
+
         response_mkt_content = (
             f">>> Voilà ce que j'ai trouvé    :arrow_down:\n{mkt_txt_content}"
             + "\n"
@@ -38,19 +51,9 @@ async def info(ctx, *args):
             + f"\n:clock2:    **Fin du contrat** : {player.data.get('Contrat jusqu’à', '-')}\n"
         )
         await ctx.send(response_mkt_content)
-        mvs = market_value.split(" ")
-        mv = float(mvs[0].replace(",", ".")) * (1000 if mvs[1] == "K€" else 1000000)
-        if mv > 1500000:
-            await ctx.send("*Tu rêves ! Nous sommes les épiciers du foot, dois-je te le rappeler ?*")
-        elif mv >= 1000000:
-            await ctx.send("*Hum... un peu juste, il va falloir en parler au Patron*")
-        elif mv >= 500000:
-            await ctx.send("*Ok, avec un panier garni et un bon salaire ça peut peut-être passer...*")
-        elif mv >= 250000:
-            await ctx.send("*C'est presque trop cher... t'es sûr de toi ?*")
-        else:
-            await ctx.send("*Je sais pas pourquoi mais ça sent la pépite, tu le sens toi aussi ?*")
-        
+        if joke != "":
+            await ctx.send(joke)
+
         await ctx.send(player.player_page_url)
     except:
         await ctx.send("Désolé, je n'ai pas trouvé de joueur avec ta requête !")
