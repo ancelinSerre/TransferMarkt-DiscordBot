@@ -28,22 +28,29 @@ class PlayerScraper():
         return
 
     def get_market_value(self):
-        data = self.player_page.find("div", class_="dataMarktwert").find("a").text.split(" € ")
-        mkt_value, currency = data[0].split(" ")
-        last_update = data[1]
-        # Parse date
-        if last_update is not None:
-            self.last_update = last_update.split(":")[-1][1:]
-        # Parse currency
-        if currency is not None:
-            currency = " M€" if currency == "mio." else " K€"
-        # Set market_value string
-        if mkt_value is not None:
-            mkt_value += currency
-        else:
-            mkt_value = "Not found"
+        mkt_value = ""
+        try:
+            data = self.player_page.find("div", class_="dataMarktwert").find("a").text.split(" € ")
 
-        self._data["market_value"] = mkt_value
+            mkt_value, currency = data[0].split(" ")
+            last_update = data[1]
+            # Parse date
+            if last_update is not None:
+                self.last_update = last_update.split(":")[-1][1:]
+            # Parse currency
+            if currency is not None:
+                currency = " M€" if currency == "mio." else " K€"
+            # Set market_value string
+            if mkt_value is not None:
+                mkt_value += currency
+            else:
+                mkt_value = "-"
+
+            self._data["market_value"] = mkt_value
+        except AttributeError:
+            mkt_value = "-"
+            self._data["market_value"] = mkt_value
+
         return
 
     def get_player_data(self):
@@ -67,6 +74,6 @@ class PlayerScraper():
         return self._data["market_value"]
 
 if __name__ == "__main__":
-    ps = PlayerScraper("Kastriot Imeri")
+    ps = PlayerScraper("Joris Cottin")
     print(ps.data)
     print(ps.market_value)

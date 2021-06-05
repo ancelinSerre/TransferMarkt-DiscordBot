@@ -14,10 +14,20 @@ async def info(ctx, *args):
         # Scrap data about the player
         player = PlayerScraper(player_name)
         market_value = player.market_value
+
+        mkt_txt_content = ""
+        if market_value == "-":
+            mkt_txt_content = (
+                f"\n:white_small_square: **{player.data['player']}** n'a pas encore de valeur marchande sur TransferMarkt"
+                + f"\n:white_small_square: Pépite ?"
+            )
+        else:
+            mkt_txt_content = (
+                f"\n:white_small_square: **{player.data['player']}** a une valeur marchande de **{market_value}** 💶 selon TransferMarkt"
+                + f"\n:white_small_square: Dernière mise à jour le **{player.last_update}**"
+            )
         response_mkt_content = (
-            f">>> Voilà ce que j'ai trouvé    :arrow_down:\n"
-            + f"\n:white_small_square: **{player.data['player']}** a une valeur marchande de **{market_value}** 💶 selon TransferMarkt"
-            + f"\n:white_small_square: Dernière mise à jour le **{player.last_update}**"
+            f">>> Voilà ce que j'ai trouvé    :arrow_down:\n{mkt_txt_content}"
             + "\n"
             + f"\n:globe_with_meridians:    **Nationalité** : {' - '.join(player.data.get('Nationalité', '-').split())}"
             + f"\n:date:    **Âge** : {player.data.get('Âge', '-')}, ({player.data.get('Date de naissance', '-')})"
