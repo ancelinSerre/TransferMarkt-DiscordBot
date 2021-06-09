@@ -128,7 +128,7 @@ async def prono(ctx, *args):
             bet_matches = [x for x in matches[current_round] if datetime.strptime(x["date"], "%d/%m/%Y") > now]
                 
             first_message = ">>> \n"
-            first_message += f" :soccer: :flag_eu: **Euro 2020** :arrow_right: *{current_round} : \n*"
+            first_message += f" :soccer: :flag_eu: **Euro 2020** :arrow_right: *{current_round} :* \n"
             await ctx.send(first_message)
             for match in bet_matches:
                 opponents = match['match'].split('|')
@@ -165,7 +165,7 @@ async def prono(ctx, *args):
         bet_matches = [x for x in matches[current_round] if datetime.strptime(x["date"], "%d/%m/%Y") > now]
             
         first_message = ">>> \n"
-        first_message += f" :soccer: :flag_eu: **Euro 2020** :arrow_right: *{current_round} : \n*"
+        first_message += f" :soccer: :flag_eu: **Euro 2020** :arrow_right: *{current_round} :* \n"
         await user.send(first_message)
         for match in bet_matches:
             opponents = match['match'].split('|')
