@@ -1,24 +1,5 @@
 [
     {
-        "user": "Ancelin_336412425400352780",
-        "competition": "euro2020",
-        "round": "Journée 1",
-        "bets": {
-            "Turquie|Italie": 1,
-            "Pays de Galles|Suisse": 2,
-            "Danemark|Finlande": 0,
-            "Belgique|Russie": 1,
-            "Angleterre|Croatie": 2,
-            "Autriche|Macédoine du Nord": 1,
-            "Pays-Bas|Ukraine": 1,
-            "Ecosse|République Tchèque": 2,
-            "Pologne|Slovaquie": 1,
-            "Espagne|Suède": 0,
-            "Hongrie|Portugal": 2,
-            "France|Allemagne": 1
-        }
-    },
-    {
         "user": "Fred MS_658403676427255808",
         "competition": "euro2020",
         "round": "Journée 1",
