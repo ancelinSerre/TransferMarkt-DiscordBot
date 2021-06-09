@@ -1,0 +1,189 @@
+{
+    "Journée 1": [
+        {
+            "date": "11/06/2021",
+            "match": "Turquie|Italie",
+            "flags": [":flag_tr:", ":flag_it:"]
+        },
+        {
+            "date": "12/06/2021",
+            "match": "Pays de Galles|Suisse",
+            "flags": [":wales:", ":flag_ch:"]
+        },
+        {
+            "date": "12/06/2021",
+            "match": "Danemark|Finlande",
+            "flags": [":flag_dk:", ":flag_fi:"]
+        },
+        {
+            "date": "12/06/2021",
+            "match": "Belgique|Russie",
+            "flags": [":flag_be:", ":flag_ru:"]
+        },
+        {
+            "date": "13/06/2021",
+            "match": "Angleterre|Croatie",
+            "flags": [":england:", ":flag_hr:"]
+        },
+        {
+            "date": "13/06/2021",
+            "match": "Autriche|Macédoine du Nord",
+            "flags": [":flag_at:", ":flag_mk:"]
+        },
+        {
+            "date": "13/06/2021",
+            "match": "Pays-Bas|Ukraine",
+            "flags": [":flag_nl:", ":flag_ua:"]
+        },
+        {
+            "date": "14/06/2021",
+            "match": "Ecosse|République Tchèque",
+            "flags": [":scotland:", ":flag_cz:"]
+        },
+        {
+            "date": "14/06/2021",
+            "match": "Pologne|Slovaquie",
+            "flags": [":flag_pl:", ":flag_sk:"]
+        },
+        {
+            "date": "14/06/2021",
+            "match": "Espagne|Suède",
+            "flags": [":flag_es:", ":flag_se:"]
+        },
+        {
+            "date": "15/06/2021",
+            "match": "Hongrie|Portugal",
+            "flags": [":flag_hu:", ":flag_pt:"]
+        },
+        {
+            "date": "15/06/2021",
+            "match": "France|Allemagne",
+            "flags": [":flag_fr:", ":flag_de:"]
+        }        
+    ],
+    "Journée 2": [
+        {
+            "date": "16/06/2021",
+            "match": "Finlande|Russie",
+            "flags": [":flag_fi:", ":flag_ru:"]
+        },
+        {
+            "date": "16/06/2021",
+            "match": "Turquie|Pays de Galles",
+            "flags": [":flag_tr:", ":wales:"]
+        },  
+        {
+            "date": "16/06/2021",
+            "match": "Italie|Suisse",
+            "flags": [":flag_it:", ":flag_ch:"]
+        },
+        {
+            "date": "17/06/2021",
+            "match": "Ukraine|Macédoine du Nord",
+            "flags": [":flag_ua:", ":flag_mk:"]
+        },
+        {
+            "date": "17/06/2021",
+            "match": "Danemark|Belgique",
+            "flags": [":flag_dk:", ":flag_be:"]
+        },
+        {
+            "date": "17/06/2021",
+            "match": "Pays-Bas|Autriche",
+            "flags": [":flag_nl:", ":flag_at:"]
+        },
+        {
+            "date": "18/06/2021",
+            "match": "Suède|Slovaquie",
+            "flags": [":flag_se:", ":flag_sk:"]
+        },
+        {
+            "date": "18/06/2021",
+            "match": "Croatie|République Tchèque",
+            "flags": [":flag_hr:", ":flag_cz:"]
+        },
+        {
+            "date": "18/06/2021",
+            "match": "Angleterre|Ecosse",
+            "flags": [":england:", ":scotland:"]
+        },
+        {
+            "date": "19/06/2021",
+            "match": "Hongrie|France",
+            "flags": [":flag_hu:", ":flag_fr:"]
+        },
+        {
+            "date": "19/06/2021",
+            "match": "Portugal|Allemagne",
+            "flags": [":flag_pt:", ":flag_de:"]
+        },
+        {
+            "date": "19/06/2021",
+            "match": "Espagne|Pologne",
+            "flags": [":flag_es:", ":flag_pl:"]
+        }
+    ],
+    "Journée 3": [
+        {
+            "date": "20/06/2021",
+            "match": "Italie|Pays de Galles",
+            "flags": [":flag_it:", ":wales:"]
+        },
+        {
+            "date": "20/06/2021",
+            "match": "Suisse|Turquie",
+            "flags": [":flag_ch:", ":flag_tr:"]
+        },
+        {
+            "date": "21/06/2021",
+            "match": "Macédoine du Nord|Pays-Bas",
+            "flags": [":flag_mk:", ":flag_nl:"]
+        },
+        {
+            "date": "21/06/2021",
+            "match": "Ukraine|Autriche",
+            "flags": [":flag_ua:", ":flag_at:"]
+        },
+        {
+            "date": "21/06/2021",
+            "match": "Finlande|Belgique",
+            "flags": [":flag_fi:", ":flag_be:"]
+        },
+        {
+            "date": "21/06/2021",
+            "match": "Russie|Danemark",
+            "flags": [":flag_ru:", ":flag_dk:"]
+        },
+        {
+            "date": "22/06/2021",
+            "match": "Croatie|Ecosse",
+            "flags": [":flag_hr:", ":scotland:"]
+        },
+        {
+            "date": "22/06/2021",
+            "match": "République Tchèque|Angleterre",
+            "flags": [":flag_cz:", ":england:"]
+        },
+        {
+            "date": "23/06/2021",
+            "match": "Slovaquie|Espagne",
+            "flags": [":flag_ck:", ":flag_es:"]
+        },
+        {
+            "date": "23/06/2021",
+            "match": "Suède|Pologne",
+            "flags": [":flag_se:", ":flag_pl:"]
+        },
+        {
+            "date": "23/06/2021",
+            "match": "Allemagne|Hongrie",
+            "flags": [":flag_de:", ":flag_hu:"]
+        },
+        {
+            "date": "23/06/2021",
+            "match": "Portugal|France",
+            "flags": [":flag_pt:", ":flag_fr:"]
+        }
+    ]
+
+}
