@@ -89,6 +89,8 @@ async def prono(ctx, *args):
                     bets["bets"][match] = 0
                 elif bet == "2️⃣":
                     bets["bets"][match] = 2
+                else:
+                    bets["bets"][match] = -1
                 
             already_played = False
             all_bets = []
@@ -101,10 +103,19 @@ async def prono(ctx, *args):
                         break
 
             if not already_played:
-                all_bets.append(bets)
-                with open(f"bets/{bets['competition']}.json", "w", encoding="utf8") as f:
-                    f.write(json.dumps(all_bets))
-                    await ctx.message.author.send("Ton pari pour cette journée a été enregistré !")
+                missing_bets = False
+                for match in bets["bets"]:
+                    if bets["bets"][match] == -1:
+                        missing_bets = True
+                        break
+                if missing_bets:
+                    await ctx.message.author.send("Tu n'as pas rempli toute ta grille :wink: reessaye avec `.prono`")
+
+                else:  
+                    all_bets.append(bets)
+                    with open(f"bets/{bets['competition']}.json", "w", encoding="utf8") as f:
+                        f.write(json.dumps(all_bets))
+                        await ctx.message.author.send("Ton pari pour cette journée a été enregistré !")
 
         if args[0] == "grille":
             matches = {}
