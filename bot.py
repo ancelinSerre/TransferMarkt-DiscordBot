@@ -1,5 +1,7 @@
 import json
+from datetime import datetime
 
+import discord
 from discord.ext import commands
 
 from playerscraper import PlayerScraper
@@ -57,6 +59,127 @@ async def info(ctx, *args):
         await ctx.send(player.player_page_url)
     except:
         await ctx.send("Désolé, je n'ai pas trouvé de joueur avec ta requête !")
+
+bets = {
+    "user": "",
+    "competition": "",
+    "round": "",
+    "bets": {}
+}
+
+
+@bot.command()
+async def prono(ctx, *args):
+    if len(args) >= 1:
+        choices = ["1️⃣", "🇳", "2️⃣"]
+        if args[0] == "ok":
+            for match in bets["bets"]:
+                cache_msg = discord.utils.get(bot.cached_messages, id=bets["bets"][match])
+                curr_reacs = cache_msg.reactions
+                for cr in curr_reacs:
+                    if cr.count == 2 and str(cr) in choices:
+                        bets["bets"][match] = str(cr)
+                        break
+
+            for match in bets["bets"]:
+                bet = bets["bets"][match] 
+                if bet == "1️⃣":
+                    bets["bets"][match] = 1
+                elif bet == "🇳":
+                    bets["bets"][match] = 0
+                elif bet == "2️⃣":
+                    bets["bets"][match] = 2
+                
+            already_played = False
+            all_bets = []
+            with open(f"bets/{bets['competition']}.json", "r", encoding="utf8") as f:
+                all_bets = json.loads(f.read())
+                for b in all_bets:
+                    if bets["user"] == b["user"] and bets["round"] == b["round"]:
+                        await ctx.message.author.send("Tu as déjà joué pour cette journée ! Tu ne peux pas modifier ton pari...")
+                        already_played = True
+                        break
+
+            if not already_played:
+                all_bets.append(bets)
+                with open(f"bets/{bets['competition']}.json", "w", encoding="utf8") as f:
+                    f.write(json.dumps(all_bets))
+                    await ctx.message.author.send("Ton pari pour cette journée a été enregistré !")
+
+        if args[0] == "grille":
+            matches = {}
+            with open("matches/euro2020.json", "r", encoding="utf8") as f:
+                matches = json.loads(f.read())
+
+            now = datetime.now()
+            latest_match_date = ""
+            current_round = ""
+            for c_round in matches:
+                latest_match_date = datetime.strptime(matches[c_round][0]["date"], "%d/%m/%Y")
+                for match in matches[c_round]:
+                    curr_match_date = datetime.strptime(match["date"], "%d/%m/%Y")
+                    if curr_match_date > latest_match_date:
+                        latest_match_date = curr_match_date
+
+                if latest_match_date > now:
+                    current_round = c_round
+                    break
+
+            bet_matches = [x for x in matches[current_round] if datetime.strptime(x["date"], "%d/%m/%Y") > now]
+                
+            first_message = ">>> \n"
+            first_message += f" :soccer: :flag_eu: **Euro 2020** :arrow_right: *{current_round} : \n*"
+            await ctx.send(first_message)
+            for match in bet_matches:
+                opponents = match['match'].split('|')
+                match_str = f"**{opponents[0]}**  {match['flags'][0]}    :vs:    {match['flags'][1]}  **{opponents[1]}**"
+                await ctx.send(f":white_small_square: [{match['date']}]\n     {match_str}")
+
+            await ctx.send(">>> Envoi la commande `.prono` sur le serveur ou directement à moi-même en DM si tu veux jouer :wink:\n")
+
+    else:
+
+        user = ctx.message.author
+        bets["user"] = f"{user.display_name}_{user.id}"
+        bets["competition"] = "euro2020"
+
+        matches = {}
+        with open("matches/euro2020.json", "r", encoding="utf8") as f:
+            matches = json.loads(f.read())
+
+        now = datetime.now()
+        latest_match_date = ""
+        current_round = ""
+        for c_round in matches:
+            latest_match_date = datetime.strptime(matches[c_round][0]["date"], "%d/%m/%Y")
+            for match in matches[c_round]:
+                curr_match_date = datetime.strptime(match["date"], "%d/%m/%Y")
+                if curr_match_date > latest_match_date:
+                    latest_match_date = curr_match_date
+
+            if latest_match_date > now:
+                current_round = c_round
+                break
+
+        bets["round"] = current_round
+        bet_matches = [x for x in matches[current_round] if datetime.strptime(x["date"], "%d/%m/%Y") > now]
+            
+        first_message = ">>> \n"
+        first_message += f" :soccer: :flag_eu: **Euro 2020** :arrow_right: *{current_round} : \n*"
+        await user.send(first_message)
+        for match in bet_matches:
+            opponents = match['match'].split('|')
+            match_str = f"**{opponents[0]}**  {match['flags'][0]}    :vs:    {match['flags'][1]}  **{opponents[1]}**"
+            curr_match = await user.send(f":white_small_square: [{match['date']}]\n     {match_str}")
+            await curr_match.add_reaction("1️⃣")
+            await curr_match.add_reaction("🇳")
+            await curr_match.add_reaction("2️⃣")
+
+            bets["bets"][match["match"]] = curr_match.id
+        
+        await user.send(
+            ">>> Pour jouer, clique sur les emotes en dessous de chaque match, [1 = Equipe 1 etc.]\nEnvoi la commande `.prono ok` quand tu as terminé :wink:\nTes pronos seront ensuite sauvegardés dans la base de données"
+        )
     
 
 discord_secret = ""
